@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="sys_user")
+@Table(name="t_user")
 public class User {
 
     @Id
@@ -16,6 +16,8 @@ public class User {
     private String userName;
 
     private String password;
+
+    private String loginType;
 
     @Override
     public String toString() {

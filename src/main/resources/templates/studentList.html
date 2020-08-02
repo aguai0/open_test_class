@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.css}" rel="stylesheet"/>
+    <meta charset="UTF-8"/>
+    <title>学生列表</title>
+</head>
+
+<body>
+<div class="container">
+    <br />
+    <!--内容-->
+    <div class="row">
+        <div class="col-sm-2" th:insert="~{index :: public_left}">
+        </div>
+        <div class="col-sm-10">
+            <table class="table table-hover">
+        <legend>
+            <strong>学生列表</strong>
+        </legend>
+        <thead>
+        <tr>
+            <th>学生编号</th>
+            <th>学生姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>管理</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${studentList}">
+            <th scope="row" th:text="${student.sno}"></th>
+            <td><a th:href="@{/student/update/{studentId}(studentId=${student.id})}" th:text="${student.name}"></a></td>
+            <td th:text="${student.sex}"></td>
+            <td th:text="${student.age}"></td>
+            <td><a class="btn btn-danger" th:href="@{/student/delete/{studentId}(studentId=${student.id})}">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div><a class="btn btn-primary" href="/student/create" role="button">新增</a></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

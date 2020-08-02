@@ -13,6 +13,8 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String teacherName;
+    private String tno;
+
+    private String name;
 
 }

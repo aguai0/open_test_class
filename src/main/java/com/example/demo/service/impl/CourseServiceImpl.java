@@ -1,8 +1,11 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.Course;
+import com.example.demo.entity.Sc;
+import com.example.demo.entity.ScResult;
 import com.example.demo.entity.Student;
 import com.example.demo.repository.CourseRepository;
+import com.example.demo.repository.ScRepository;
 import com.example.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,14 +13,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseRepository repository;
+
+    @Autowired
+    ScRepository scRepository;
 
     @Override
     public Course queryById(long id) {
@@ -44,7 +52,30 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void delete(Course course) {
+    public void delete(Long id) {
+        Course course = repository.findById(id).get();
         repository.delete(course);
+    }
+
+    @Override
+    public Course queryByCondition(Long id, String cno) {
+        if (id!=null && StringUtils.hasText(cno)){
+            return repository.queryCourseByIdNotAndCnoEquals(id,cno);
+        }
+        return repository.queryCourseByCno(cno);
+    }
+
+    @Override
+    public List<Course> queryAll() {
+        List<Course> courseList = repository.findAll();
+        List<ScResult> scList = scRepository.countSc();
+        for (Course c: courseList) {
+            for (ScResult sc: scList) {
+                if (c.getId().equals(sc.getCid())){
+                    c.setOrderCount(sc.getCountSid().intValue());
+                }
+            }
+        }
+       return courseList;
     }
 }

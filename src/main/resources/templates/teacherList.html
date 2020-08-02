@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.css}" rel="stylesheet"/>
+    <link th:href="@{/css/default.css}" rel="stylesheet"/>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+    <meta charset="UTF-8"/>
+    <title>教师列表</title>
+</head>
+
+<body>
+<div class="container">
+    <br />
+<!--内容-->
+<div class="row">
+    <div class="col-sm-2" th:insert="~{index :: public_left}">
+    </div>
+    <div class="col-sm-10">
+        <table class="table table-hover">
+        <legend>
+            <strong>教师列表</strong>
+        </legend>
+        <thead>
+        <tr class="alert-info active table-">
+            <th>教师工号</th>
+            <th>教师姓名</th>
+            <th>管理</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="teacher : ${teacherList}">
+            <th scope="row" th:text="${teacher.tno}"></th>
+            <td><a th:href="@{/teacher/update/{teacherId}(teacherId=${teacher.id})}" th:text="${teacher.name}"></a></td>
+            <td><a class="btn btn-danger" th:href="@{/teacher/delete/{teacherId}(teacherId=${teacher.id})}">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+        <div><a class="btn btn-primary" href="/teacher/create" role="button">新增</a></div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -2,14 +2,15 @@ package com.example.demo.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "t_subscription")
-public class Subscription {
+@Table(name = "t_sc")
+public class Sc {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     /** 课程id */
@@ -17,5 +18,4 @@ public class Subscription {
 
     /** 学生id */
     private Long sid;
-
 }

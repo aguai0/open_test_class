@@ -13,7 +13,12 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String sno;
+
     private String name;
 
+    private String sex;
+
+    private Integer age;
 
 }

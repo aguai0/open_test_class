@@ -10,8 +10,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +27,17 @@ public class TeacherServiceImpl implements TeacherService {
 
         Optional<Teacher> optional = repository.findById(id);
         return optional.get();
+    }
+
+    @Override
+    public List<Teacher> queryAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public void delete(long id) {
+        Teacher teacher = repository.findById(id).get();
+        repository.delete(teacher);
     }
 
     @Override
@@ -46,7 +59,10 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public void delete(Teacher teacher) {
-        repository.delete(teacher);
+    public Teacher queryByCondition(Long id, String tno) {
+        if (id!=null && StringUtils.hasText(tno)){
+            return repository.queryTeacherByIdNotAndTnoEquals(id,tno);
+        }
+        return repository.queryTeacherByTno(tno);
     }
 }

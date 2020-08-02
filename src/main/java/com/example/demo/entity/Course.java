@@ -13,11 +13,15 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    /** 课程编号 */
-    private String cName;
-
     /** 课程名称 */
-    private String cNo;
+    private String name;
+
+    /** 课程编号 */
+    private String cno;
+
+    /** 课程订阅数量 */
+    @Transient
+    private Integer orderCount;
 
     /** 课程状态 1-有效 0-无效 */
     private Integer status;

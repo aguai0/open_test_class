@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>1</title>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="container">
+    <br />
+    <!--内容-->
+    <div class="row" >
+        <div class="col-sm-2" >
+            <ul class="nav nav-list" th:fragment="public_left">
+                <li class="nav-header">管理页面</li>
+                <div th:if=" ${loginType} eq 'admin'">
+                    <li ><a  class="nav-link active" href="#" th:href="@{/teacher}" th:class="${activeUri=='teacher'?'nav-link active':'nav-link'}">教师管理</a></li>
+                    <li class="nav-link"><a href="#" th:href="@{/student}" th:class="${activeUri=='student'?'nav-link active':'nav-link'}">学生管理</a></li>
+                </div>
+                <div th:if=" ${loginType} eq 'teacher'">
+                    <li><a class="nav-link" href="#" th:href="@{/course}" th:class="${activeUri=='course'?'nav-link active':'nav-link'}">课程管理</a></li>
+                </div>
+                <div th:if=" ${loginType} eq 'student'">
+                    <li><a class="nav-link" href="#" th:href="@{/course}" th:class="${activeUri=='course'?'nav-link active':'nav-link'}">订阅管理</a></li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
+</body>
+</html>

@@ -4,6 +4,7 @@ import com.example.demo.entity.Course;
 import com.example.demo.entity.Teacher;
 
 import java.util.Iterator;
+import java.util.List;
 
 public interface CourseService {
     /** 查询单个*/
@@ -20,4 +21,10 @@ public interface CourseService {
 
     /** 删除 */
     void delete(Long id);
+
+    /** 根据条件查询 */
+    Course queryByCondition(Long id, String cno);
+
+    /** 查询所有 */
+    List<Course> queryAll();
 }
