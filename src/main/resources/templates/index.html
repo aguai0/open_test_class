@@ -33,7 +33,7 @@
                     <li><a class="nav-link" href="#" th:href="@{/course}" th:class="${activeUri=='course'?'nav-link active':'nav-link'}">课程管理</a></li>
                 </div>
                 <div th:if=" ${loginType} eq 'student'">
-                    <li><a class="nav-link" href="#" th:href="@{/course}" th:class="${activeUri=='course'?'nav-link active':'nav-link'}">订阅管理</a></li>
+                    <li><a class="nav-link" href="#" th:href="@{/course/order}" th:class="${activeUri=='course'?'nav-link active':'nav-link'}">订阅管理</a></li>
                 </div>
             </ul>
         </div>

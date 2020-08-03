@@ -34,6 +34,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<Course> queryAll() {
+        return repository.findAll();
+    }
+
+    @Override
     public Iterator<Course> queryAll(int pageNum, int pageSize) {
         Pageable pageable = PageRequest.of(pageNum, pageSize, Sort.by(Sort.Direction.DESC,"id"));
         Page<Course> courses = repository.findAll(pageable);
@@ -66,7 +71,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> queryAll() {
+    public List<Course> queryOrderAll() {
         List<Course> courseList = repository.findAll();
         List<ScResult> scList = scRepository.countSc();
         for (Course c: courseList) {

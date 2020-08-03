@@ -14,4 +14,6 @@ public interface ScRepository extends JpaRepository<Sc, Long> {
 
     @Query("select new com.example.demo.entity.ScResult(s.cid,count(s.sid)) from Sc s group by s.cid")
     List<ScResult> countSc();
+
+    List<Sc> queryByCidEquals(Long cid);
 }

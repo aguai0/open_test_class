@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.css}" rel="stylesheet"/>
+    <meta charset="UTF-8"/>
+    <title>课程列表</title>
+</head>
+
+<body>
+<div class="container">
+    <br />
+    <!--内容-->
+    <div class="row">
+        <div class="col-sm-2" th:insert="~{index :: public_left}">
+        </div>
+        <div class="col-sm-10">
+            <table class="table table-hover">
+        <legend>
+            <strong>课程列表</strong>
+        </legend>
+        <thead>
+        <tr>
+            <th>课程编号</th>
+            <th>课程姓名</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courseList}">
+            <th scope="row" th:text="${course.cno}"></th>
+            <td th:text="${course.name}"></td>
+            <td>
+                <div th:if=" ${course.orderCount} eq 0 ">
+                    <a class="btn btn-danger" th:href="@{/course/orderCourse/{cid}/(cid=${course.id})}">订阅</a>
+                </div>
+                <div th:if=" ${course.orderCount} gt 0 ">
+                    <a class="btn btn-danger" th:href="@{/course/cancelCourse/{cid}(cid=${course.id})}">取消订阅</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

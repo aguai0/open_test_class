@@ -1,6 +1,9 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
@@ -18,4 +21,12 @@ public class Sc {
 
     /** 学生id */
     private Long sid;
+
+    public Sc() {
+    }
+
+    public Sc(Long cid, Long sid) {
+        this.cid = cid;
+        this.sid = sid;
+    }
 }

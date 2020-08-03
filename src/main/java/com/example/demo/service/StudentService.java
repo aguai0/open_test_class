@@ -27,4 +27,6 @@ public interface StudentService {
 
     /** 删除 */
     void delete(long id);
+
+    Student queryBySno(String sno);
 }

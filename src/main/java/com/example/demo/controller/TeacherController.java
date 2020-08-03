@@ -1,21 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Course;
 import com.example.demo.entity.Teacher;
-import com.example.demo.entity.Teacher;
-import com.example.demo.service.CourseService;
 import com.example.demo.service.TeacherService;
-import com.example.demo.service.SubscriptionService;
-import com.example.demo.service.TeacherService;
+import com.example.demo.service.ScService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 @Controller
 @RequestMapping("/teacher")
@@ -29,7 +21,7 @@ public class TeacherController {
     @Autowired
     TeacherService teacherService;
     @Autowired
-    SubscriptionService subscriptionService;
+    ScService scService;
 
     /**
      * 获取 Teacher 列表

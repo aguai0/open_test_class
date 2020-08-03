@@ -4,6 +4,7 @@ import com.example.demo.entity.Course;
 import com.example.demo.entity.Course;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.CourseService;
+import com.example.demo.service.ScService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,10 +21,15 @@ public class CourseController {
 
     private static final String COURSE_FORM_PATH_NAME = "courseForm";
     private static final String COURSE_LIST_PATH_NAME = "courseList";
+    private static final String COURSE_ORDER_LIST_PATH_NAME = "courseOrderList";
     private static final String REDIRECT_TO_COURSE_URL = "redirect:/course";
+    private static final String REDIRECT_TO_COURSE_ORDER_URL = "redirect:/course/order";
 
     @Autowired
     CourseService courseService;
+
+    @Autowired
+    ScService scService;
 
     /**
      * 获取 Course 列表
@@ -102,6 +108,38 @@ public class CourseController {
     public String deleteCourse(@PathVariable Long id) {
         courseService.delete(id);
         return REDIRECT_TO_COURSE_URL;
+    }
+
+    /**
+     * 获取 Course 列表
+     * 处理 "/course" 的 GET 请求，用来获取 Course 列表
+     */
+    @RequestMapping(value = "/order",method = RequestMethod.GET)
+    public String getCourseOrderList(ModelMap map) {
+        map.addAttribute("courseList",courseService.queryOrderAll());
+        map.put("loginType", "student");
+        return COURSE_ORDER_LIST_PATH_NAME;
+    }
+
+    /**
+     * 订阅课程 Course
+     */
+    @RequestMapping(value = "/orderCourse/{cid}", method = RequestMethod.GET)
+    public String orderCourse(@PathVariable Long cid, ModelMap map) {
+        String result = scService.order(cid);
+        if (result.equals("fail")){
+            map.addAttribute("error", "订阅失败，未找到学生账号");
+        }
+        return REDIRECT_TO_COURSE_ORDER_URL;
+    }
+
+    /**
+     * 取消订阅课程 Course
+     */
+    @RequestMapping(value = "/cancelCourse/{cid}", method = RequestMethod.GET)
+    public String cancelCourse(@PathVariable Long cid, ModelMap map) {
+        scService.cancel(cid);
+        return REDIRECT_TO_COURSE_ORDER_URL;
     }
 
 }

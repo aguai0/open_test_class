@@ -65,4 +65,9 @@ public class StudentServiceImpl implements StudentService {
         Student student = repository.findById(id).get();
         repository.delete(student);
     }
+
+    @Override
+    public Student queryBySno(String sno) {
+        return repository.queryStudentBySno(sno);
+    }
 }

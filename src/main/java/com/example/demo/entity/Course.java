@@ -21,7 +21,7 @@ public class Course {
 
     /** 课程订阅数量 */
     @Transient
-    private Integer orderCount;
+    private Integer orderCount = 0;
 
     /** 课程状态 1-有效 0-无效 */
     private Integer status;

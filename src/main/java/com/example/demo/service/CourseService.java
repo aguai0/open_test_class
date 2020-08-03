@@ -10,6 +10,9 @@ public interface CourseService {
     /** 查询单个*/
     Course queryById(long id);
 
+    /** 查询所有 */
+    List<Course> queryAll();
+
     /** 查询全部列表*/
     Iterator<Course> queryAll(int pageNum, int pageSize);
 
@@ -26,5 +29,5 @@ public interface CourseService {
     Course queryByCondition(Long id, String cno);
 
     /** 查询所有 */
-    List<Course> queryAll();
+    List<Course> queryOrderAll();
 }
