@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.Iterator;
@@ -57,9 +58,17 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         Course course = repository.findById(id).get();
         repository.delete(course);
+
+        List<Sc> scList = scRepository.queryByCidEquals(id);
+        if (!scList.isEmpty()){
+            for (Sc sc: scList) {
+                scRepository.delete(sc);
+            }
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.constant.LoginTypeEnum;
 import com.example.demo.constant.UserSession;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
@@ -32,11 +33,11 @@ public class LoginController {
             map.put("information", "登陆失败,请检查用户名和密码");
             return "login";
         }
-        if (("Admin").equals(userName)) {
-            map.put("loginType", "admin");
-        }else{
-            map.put("loginType", loginType);
+        if (!LoginTypeEnum.admin.name().equals(loginType) && "admin".equalsIgnoreCase(userName)){
+            map.put("information", "请选择Admin登录类型");
+            return "login";
         }
+        map.put("loginType", loginType);
         UserSession.LOGIN_INFO.set(userName);
         return "index";
     }

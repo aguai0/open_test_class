@@ -28,6 +28,6 @@ public interface CourseService {
     /** 根据条件查询 */
     Course queryByCondition(Long id, String cno);
 
-    /** 查询所有 */
+    /** 查询所有课程及课程的订阅数量 */
     List<Course> queryOrderAll();
 }

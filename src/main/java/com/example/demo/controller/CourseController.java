@@ -37,7 +37,7 @@ public class CourseController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String getCourseList(ModelMap map) {
-        map.addAttribute("courseList",courseService.queryAll());
+        map.addAttribute("courseList",courseService.queryOrderAll());
         map.put("loginType", "teacher");
         return COURSE_LIST_PATH_NAME;
     }
