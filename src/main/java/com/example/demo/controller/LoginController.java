@@ -33,7 +33,8 @@ public class LoginController {
             map.put("information", "登陆失败,请检查用户名和密码");
             return "login";
         }
-        if (!LoginTypeEnum.admin.name().equals(loginType) && "admin".equalsIgnoreCase(userName)){
+        if ((LoginTypeEnum.admin.name().equals(loginType) && !"admin".equalsIgnoreCase(userName)) ||
+                (!LoginTypeEnum.admin.name().equals(loginType) && "admin".equalsIgnoreCase(userName))){
             map.put("information", "请选择Admin登录类型");
             return "login";
         }
