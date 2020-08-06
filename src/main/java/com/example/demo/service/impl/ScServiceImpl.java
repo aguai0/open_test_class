@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.constant.LoginTypeEnum;
 import com.example.demo.constant.UserSession;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Sc;
@@ -24,7 +25,7 @@ public class ScServiceImpl implements ScService {
 
     @Override
     public String order(Long cid) {
-        String sno = UserSession.LOGIN_INFO.get();
+        String sno = UserSession.LOGIN_INFO.get(LoginTypeEnum.student.name());
 
         Student student = studentService.queryBySno(sno);
         if (student == null) {

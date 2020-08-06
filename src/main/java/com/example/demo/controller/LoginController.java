@@ -38,8 +38,14 @@ public class LoginController {
             map.put("information", "请选择Admin登录类型");
             return "login";
         }
+        if (loginType.equalsIgnoreCase(LoginTypeEnum.student.name()) && userName.equals("002")){
+            map.put("information", "登陆失败,请学生登录类型");
+            return "login";
+        }
         map.put("loginType", loginType);
-        UserSession.LOGIN_INFO.set(userName);
+        if (loginType.equalsIgnoreCase(LoginTypeEnum.student.name())){
+            UserSession.LOGIN_INFO.put(loginType,userName);
+        }
         return "index";
     }
 }
